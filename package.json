@@ -1,0 +1,26 @@
+{
+  "name": "CensusAnalyzerProblem",
+  "version": "1.0.0",
+  "description": "Welcome to Census Analyzer Problem using JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anikchowdhury440/CensusAnalyzerProblemJavaScript.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anikchowdhury440/CensusAnalyzerProblemJavaScript/issues"
+  },
+  "homepage": "https://github.com/anikchowdhury440/CensusAnalyzerProblemJavaScript#readme",
+  "devDependencies": {
+    "jest": "^26.6.3"
+  },
+  "dependencies": {
+    "csv-parser": "^2.3.3"
+  }
+}
