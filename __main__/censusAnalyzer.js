@@ -23,6 +23,11 @@ class CensusAnalyzer {
                 }
                 fs.createReadStream(this.filePath)
                     .pipe(csv())
+                    .on('headers', (header) => {
+                        if(header[0] != 'State' || header[1] != 'Population' || header[2] != 'AreaInSqKm' || header[3] != 'DensityPerSqKm') {
+                            rejects(new Error('Invalid Header'));
+                        }
+                    })
                     .on('data', (data) => {
                         if(data.State == '' || data.Population == '' || data.AreaInSqKm == '' || data.DensityPerSqKm == '') {
                             rejects(new Error('Invalid Delimiter'));
