@@ -22,8 +22,8 @@ SrNo,StateName,TIN,StateCode
 21,Madhya Pradesh,23,MP
 22,Maharashtra,27,MH
 23,Manipur,14,MN
-24,Meghalaya,17,ME
-25,Mizoram,15,MI
+24,17,ME,
+25,Mizoram,MI,
 26,Nagaland,13,NL
 27,Odisha,21,OR
 28,Pondicherry,34,PY
