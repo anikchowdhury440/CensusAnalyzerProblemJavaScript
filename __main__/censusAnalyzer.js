@@ -16,7 +16,7 @@ class CensusAnalyzer {
             if(!fs.existsSync(this.filePath)) {
                 rejects(new Error('No Such File'));
             }
-            else{
+            else {
                 var ext = path.extname(this.filePath);
                 if(ext != '.csv'){
                     rejects(new Error('Invalid File Type'));
@@ -24,7 +24,12 @@ class CensusAnalyzer {
                 fs.createReadStream(this.filePath)
                     .pipe(csv())
                     .on('data', (data) => {
-                        censusData.push(data);
+                        if(data.State == '' || data.Population == '' || data.AreaInSqKm == '' || data.DensityPerSqKm == '') {
+                            rejects(new Error('Invalid Delimiter'));
+                        }
+                        else {
+                            censusData.push(data);
+                        }
                     })
                     .on('end', () => {
                         resolve(censusData.length);
