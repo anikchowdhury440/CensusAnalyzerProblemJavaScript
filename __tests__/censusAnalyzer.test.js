@@ -8,26 +8,26 @@ const INDIA_STATE_CODE_CSV = "C:\\Users\\Anik Chowdhury\\Desktop\\JavaScriptProj
 describe('testsForLoadIndiaStateCensusCSV', () => {
     test('givenStateCensusFile_EnsureNoOfRecordsMatches', () => {
         const censusAnalyzer = new CensusAnalyzer(INDIA_STATE_CENSUS_CSV);
-        return expect(censusAnalyzer.loadStateCensusCSV()).resolves.toBe(29);
+        return expect(censusAnalyzer.loadIndiaStateCensusCSV()).resolves.toBe(29);
     });
     
     test('givenStateCensusFileIfIncorrect_ShouldThrowException', () => {
         const censusAnalyzer = new CensusAnalyzer(WRONG_FILE);
-        return expect(censusAnalyzer.loadStateCensusCSV()).rejects.toThrow('No Such File');
+        return expect(censusAnalyzer.loadIndiaStateCensusCSV()).rejects.toThrow('No Such File');
     });
     
     test('givenStateCensusFileIfCorrect_ButTypeIncorrect_ShouldThrowException', () => {
         const censusAnalyzer = new CensusAnalyzer(INDIA_STATE_CENSUS_TXT);
-        return expect(censusAnalyzer.loadStateCensusCSV()).rejects.toThrow('Invalid File Type');
+        return expect(censusAnalyzer.loadIndiaStateCensusCSV()).rejects.toThrow('Invalid File Type');
     });
     
     test('givenStateCensusFileIfCorrect_ButDelimitterIncorrect_ShouldThrowException', () => {
         const censusAnalyzer = new CensusAnalyzer(INDIA_STATE_CENSUS_WRONG_DELIMITER_CSV);
-        return expect(censusAnalyzer.loadStateCensusCSV()).rejects.toThrow('Invalid Delimiter');
+        return expect(censusAnalyzer.loadIndiaStateCensusCSV()).rejects.toThrow('Invalid Delimiter');
     });
 
     test('givenStateCensusFileIfCorrect_ButHeaderIncorrect_ShouldThrowException', () => {
         const censusAnalyzer = new CensusAnalyzer(INDIA_STATE_CODE_CSV);
-        return expect(censusAnalyzer.loadStateCensusCSV()).rejects.toThrow('Invalid Header');
+        return expect(censusAnalyzer.loadIndiaStateCensusCSV()).rejects.toThrow('Invalid Header');
     });
 });

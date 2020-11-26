@@ -10,7 +10,7 @@ class CensusAnalyzer {
         this.filePath = filePath;
     }
 
-    loadStateCensusCSV() {
+    loadIndiaStateCensusCSV() {
         return new Promise((resolve, rejects) => {
             
             if(!fs.existsSync(this.filePath)) {
@@ -42,6 +42,7 @@ class CensusAnalyzer {
             }
         })      
     }
-}
+
+ }
 
 module.exports = CensusAnalyzer;
