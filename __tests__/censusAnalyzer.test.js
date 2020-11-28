@@ -11,7 +11,7 @@ const INDIA_STATE_CODE_WRONG_DELIMITER_CSV = "C:\\Users\\Anik Chowdhury\\Desktop
 describe('testsForLoadIndiaStateCensusCSV', () => {
     test('givenIndiaStateCensusFile_EnsureNoOfRecordsMatches', () => {
         const censusAnalyzer = new CensusAnalyzer();
-        return censusAnalyzer.loadIndiaStateCensusCSV(INDIA_STATE_CENSUS_CSV).then(data => expect(data).toBe(29));
+        return censusAnalyzer.loadIndiaStateCensusCSV(INDIA_STATE_CENSUS_CSV).then(data => expect(data.length).toBe(29));
     });
     
     test('givenIndiaStateCensusFileIfIncorrect_ShouldThrowException', () => {
@@ -38,7 +38,7 @@ describe('testsForLoadIndiaStateCensusCSV', () => {
 describe('testsForLoadIndiaStateCodeCSV', () => {
     test('givenIndiaStateCodeFile_EnsureNoOfRecordsMatches', () => {
         const censusAnalyzer = new CensusAnalyzer();
-        return censusAnalyzer.loadIndiaStateCodeCSV(INDIA_STATE_CODE_CSV).then(data => expect(data).toBe(37));
+        return censusAnalyzer.loadIndiaStateCodeCSV(INDIA_STATE_CODE_CSV).then(data => expect(data.length).toBe(37));
     });
     
     test('givenIndiaStateCodeFileIfIncorrect_ShouldThrowException', () => {
@@ -61,3 +61,13 @@ describe('testsForLoadIndiaStateCodeCSV', () => {
         return censusAnalyzer.loadIndiaStateCodeCSV(INDIA_STATE_CENSUS_CSV).catch(error => expect(error.message).toBe('Invalid Header'));
     });
 });
+
+describe('testForSortStateCensusCSV', () => {
+    test('givenStateCensusData_WhenSortedByState_ShouldReportSortedFormat', () => {
+        const censusAnalyzer = new CensusAnalyzer();
+        return censusAnalyzer.sortByState(INDIA_STATE_CENSUS_CSV).then(data => {
+            expect(data[0].State).toBe('Andhra Pradesh');
+            expect(data[28].State).toBe('West Bengal');
+        });
+    });
+})

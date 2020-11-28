@@ -1,18 +1,19 @@
 const { rejects } = require('assert');
+const { error } = require('console');
 const csv = require('csv-parser');
 const fs = require('fs');
 const { resolve } = require('path');
 const path = require('path');
+const writeFileToJson = require('../__main__/writeFileToJson');
 
-// let indiaStateCensusData = []
-// let indiaStateCodeData = []
 class CensusAnalyzer {
     constructor() {
+        this.indiaStateCensusData = []
+        this.indiaStateCodeData = []
     }
 
     loadIndiaStateCensusCSV(filePath) {
         return new Promise((resolve, rejects) => {
-            let indiaStateCensusData = [];
             if(!this.checkFileType(filePath)) {
                 rejects(new Error('Invalid File Type'));
             }
@@ -34,11 +35,11 @@ class CensusAnalyzer {
                                 rejects(new Error('Invalid Delimiter'));
                         }
                         else {
-                            indiaStateCensusData.push(data);
+                            this.indiaStateCensusData.push(data);
                         }
                     })
                     .on('end', () => {
-                        resolve(indiaStateCensusData.length);
+                        resolve(this.indiaStateCensusData);
                     });
                 
             }
@@ -47,7 +48,6 @@ class CensusAnalyzer {
 
     loadIndiaStateCodeCSV(filePath) {
         return new Promise((resolve, rejects) => {
-            let indiaStateCodeData = []
             if(!this.checkFileType(filePath)) {
                 rejects(new Error('Invalid File Type'));
             }
@@ -69,11 +69,11 @@ class CensusAnalyzer {
                                 rejects(new Error('Invalid Delimiter'));
                         }
                         else {
-                            indiaStateCodeData.push(data);
+                            this.indiaStateCodeData.push(data);
                         }
                     })
                     .on('end', () => {
-                        resolve(indiaStateCodeData.length);
+                        resolve(this.indiaStateCodeData);
                     });
                 
             }
@@ -84,6 +84,17 @@ class CensusAnalyzer {
     checkFileType(filePath) {
         var ext = path.extname(filePath);
         return ext == ".csv";
+    }
+
+    sortByState(filePath) {
+        return new Promise((resolve, rejects) => {
+            this.loadIndiaStateCensusCSV(filePath)
+                .then(data => {
+                    data.sort((data1, data2) => (data1.State < data2.State) ? -1 : 1)
+                    writeFileToJson(data);
+                    resolve(data)
+                })
+        })
     }
     
  }
