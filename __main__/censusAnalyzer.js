@@ -13,14 +13,14 @@ class CensusAnalyzer {
     loadIndiaStateCensusCSV(filePath) {
         return new Promise((resolve, rejects) => {
             let indiaStateCensusData = [];
-            if(!fs.existsSync(filePath)) {
-                rejects(new Error('No Such File'));
-            }
-            else if(!this.checkFileType(filePath)) {
+            if(!this.checkFileType(filePath)) {
                 rejects(new Error('Invalid File Type'));
             }
             else {
                 fs.createReadStream(filePath)
+                    .on('error', err => {
+                        rejects(new Error('No Such File'))
+                    })
                     .pipe(csv())
                     .on('headers', (header) => {
                         if(header[0] != 'State' || header[1] != 'Population' || 
@@ -48,14 +48,14 @@ class CensusAnalyzer {
     loadIndiaStateCodeCSV(filePath) {
         return new Promise((resolve, rejects) => {
             let indiaStateCodeData = []
-            if(!fs.existsSync(filePath)) {
-                rejects(new Error('No Such File'));
-            }
-            else if(!this.checkFileType(filePath)) {
+            if(!this.checkFileType(filePath)) {
                 rejects(new Error('Invalid File Type'));
             }
             else {
                 fs.createReadStream(filePath)
+                    .on('error', err => {
+                        rejects(new Error('No Such File'))
+                    })
                     .pipe(csv())
                     .on('headers', (header) => {
                         if(header[0] != 'SrNo' || header[1] != 'StateName' || 
