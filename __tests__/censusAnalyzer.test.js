@@ -71,11 +71,19 @@ describe('testForSortStateCensusCSV', () => {
         });
     });
 
-    test('givenStateCodeData_WhenSortedByState_ShouldReportSortedFormat', () => {
+    test('givenStateCodeData_WhenSortedByStateCode_ShouldReportSortedFormat', () => {
         const censusAnalyzer = new CensusAnalyzer();
         return censusAnalyzer.sortByStateCode(INDIA_STATE_CODE_CSV).then(data => {
             expect(data[0].StateName).toBe('Andhra Pradesh New');
             expect(data[36].StateName).toBe('West Bengal');
+        });
+    });
+
+    test('givenStateCensusData_WhenSortedByPopulation_ShouldReportSortedFormat', () => {
+        const censusAnalyzer = new CensusAnalyzer();
+        return censusAnalyzer.sortByPopulation(INDIA_STATE_CENSUS_CSV).then(data => {
+            expect(data[0].State).toBe('Uttar Pradesh');
+            expect(data[28].State).toBe('Sikkim');
         });
     });
 })
