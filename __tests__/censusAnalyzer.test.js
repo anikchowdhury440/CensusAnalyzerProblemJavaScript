@@ -86,4 +86,12 @@ describe('testForSortStateCensusCSV', () => {
             expect(data[28].State).toBe('Sikkim');
         });
     });
+
+    test('givenStateCensusData_WhenSortedByPopulationDensity_ShouldReportSortedFormat', () => {
+        const censusAnalyzer = new CensusAnalyzer();
+        return censusAnalyzer.sortByPopulationDensity(INDIA_STATE_CENSUS_CSV).then(data => {
+            expect(data[0].State).toBe('Bihar');
+            expect(data[28].State).toBe('Arunachal Pradesh');
+        });
+    });
 })

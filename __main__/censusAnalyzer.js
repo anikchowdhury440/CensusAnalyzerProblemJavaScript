@@ -118,6 +118,17 @@ class CensusAnalyzer {
                 })
         })
     }
+
+    sortByPopulationDensity(filePath) {
+        return new Promise((resolve, rejects) => {
+            this.loadIndiaStateCensusCSV(filePath)
+                .then(data => {
+                    data.sort((data1, data2) => (parseInt(data1.DensityPerSqKm) > parseInt(data2.DensityPerSqKm)) ? -1 : 1)
+                    writeFileToJson(data);
+                    resolve(data)
+                })
+        })
+    }
  }
 
 module.exports = CensusAnalyzer;
