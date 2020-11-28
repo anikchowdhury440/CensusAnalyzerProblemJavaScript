@@ -8,11 +8,10 @@ const writeFileToJson = require('../__main__/writeFileToJson');
 
 class CensusAnalyzer {
     constructor() {
-        this.indiaStateCensusData = []
-        this.indiaStateCodeData = []
     }
 
     loadIndiaStateCensusCSV(filePath) {
+        let indiaStateCensusData = [];
         return new Promise((resolve, rejects) => {
             if(!this.checkFileType(filePath)) {
                 rejects(new Error('Invalid File Type'));
@@ -35,11 +34,11 @@ class CensusAnalyzer {
                                 rejects(new Error('Invalid Delimiter'));
                         }
                         else {
-                            this.indiaStateCensusData.push(data);
+                            indiaStateCensusData.push(data);
                         }
                     })
                     .on('end', () => {
-                        resolve(this.indiaStateCensusData);
+                        resolve(indiaStateCensusData);
                     });
                 
             }
@@ -47,6 +46,7 @@ class CensusAnalyzer {
     }
 
     loadIndiaStateCodeCSV(filePath) {
+        let indiaStateCodeData = [];
         return new Promise((resolve, rejects) => {
             if(!this.checkFileType(filePath)) {
                 rejects(new Error('Invalid File Type'));
@@ -69,11 +69,11 @@ class CensusAnalyzer {
                                 rejects(new Error('Invalid Delimiter'));
                         }
                         else {
-                            this.indiaStateCodeData.push(data);
+                            indiaStateCodeData.push(data);
                         }
                     })
                     .on('end', () => {
-                        resolve(this.indiaStateCodeData);
+                        resolve(indiaStateCodeData);
                     });
                 
             }
