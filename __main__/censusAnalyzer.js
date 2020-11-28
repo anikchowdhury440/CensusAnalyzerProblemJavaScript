@@ -129,6 +129,17 @@ class CensusAnalyzer {
                 })
         })
     }
+
+    sortByArea(filePath) {
+        return new Promise((resolve, rejects) => {
+            this.loadIndiaStateCensusCSV(filePath)
+                .then(data => {
+                    data.sort((data1, data2) => (parseInt(data1.AreaInSqKm) > parseInt(data2.AreaInSqKm)) ? -1 : 1)
+                    writeFileToJson(data);
+                    resolve(data)
+                })
+        })
+    }
  }
 
 module.exports = CensusAnalyzer;

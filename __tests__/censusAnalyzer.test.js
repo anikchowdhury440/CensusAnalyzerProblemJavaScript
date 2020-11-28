@@ -94,4 +94,12 @@ describe('testForSortStateCensusCSV', () => {
             expect(data[28].State).toBe('Arunachal Pradesh');
         });
     });
+
+    test('givenStateCensusData_WhenSortedByArea_ShouldReportSortedFormat', () => {
+        const censusAnalyzer = new CensusAnalyzer();
+        return censusAnalyzer.sortByArea(INDIA_STATE_CENSUS_CSV).then(data => {
+            expect(data[0].State).toBe('Rajasthan');
+            expect(data[28].State).toBe('Goa');
+        });
+    });
 })
