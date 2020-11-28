@@ -70,4 +70,12 @@ describe('testForSortStateCensusCSV', () => {
             expect(data[28].State).toBe('West Bengal');
         });
     });
+
+    test('givenStateCodeData_WhenSortedByState_ShouldReportSortedFormat', () => {
+        const censusAnalyzer = new CensusAnalyzer();
+        return censusAnalyzer.sortByStateCode(INDIA_STATE_CODE_CSV).then(data => {
+            expect(data[0].StateName).toBe('Andhra Pradesh New');
+            expect(data[36].StateName).toBe('West Bengal');
+        });
+    });
 })

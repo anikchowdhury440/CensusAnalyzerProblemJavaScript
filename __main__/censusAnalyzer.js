@@ -96,6 +96,17 @@ class CensusAnalyzer {
                 })
         })
     }
+
+    sortByStateCode(filePath) {
+        return new Promise((resolve, rejects) => {
+            this.loadIndiaStateCodeCSV(filePath)
+                .then(data => {
+                    data.sort((data1, data2) => (data1.StateCode < data2.StateCode) ? -1 : 1)
+                    writeFileToJson(data);
+                    resolve(data)
+                })
+        })
+    }
     
  }
 
