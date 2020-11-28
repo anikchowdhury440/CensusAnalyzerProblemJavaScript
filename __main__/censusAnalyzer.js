@@ -4,20 +4,20 @@ const fs = require('fs');
 const { resolve } = require('path');
 const path = require('path');
 
-let indiaStateCensusData = []
-let indiaStateCodeData = []
+// let indiaStateCensusData = []
+// let indiaStateCodeData = []
 class CensusAnalyzer {
     constructor() {
     }
 
     loadIndiaStateCensusCSV(filePath) {
         return new Promise((resolve, rejects) => {
-            var ext = path.extname(filePath);
+            let indiaStateCensusData = [];
             if(!fs.existsSync(filePath)) {
                 rejects(new Error('No Such File'));
             }
-            else if(ext != '.csv'){
-                    rejects(new Error('Invalid File Type'));
+            else if(!this.checkFileType(filePath)) {
+                rejects(new Error('Invalid File Type'));
             }
             else {
                 fs.createReadStream(filePath)
@@ -47,11 +47,11 @@ class CensusAnalyzer {
 
     loadIndiaStateCodeCSV(filePath) {
         return new Promise((resolve, rejects) => {
-            var ext = path.extname(filePath);
+            let indiaStateCodeData = []
             if(!fs.existsSync(filePath)) {
                 rejects(new Error('No Such File'));
             }
-            else if(ext != '.csv') {
+            else if(!this.checkFileType(filePath)) {
                 rejects(new Error('Invalid File Type'));
             }
             else {
@@ -78,8 +78,14 @@ class CensusAnalyzer {
                 
             }
         })      
+
     }
 
+    checkFileType(filePath) {
+        var ext = path.extname(filePath);
+        return ext == ".csv";
+    }
+    
  }
 
 module.exports = CensusAnalyzer;
